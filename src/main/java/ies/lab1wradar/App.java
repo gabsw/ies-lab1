@@ -2,12 +2,17 @@ package ies.lab1wradar;
 
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App {
+	
+	 private static Logger logger = LogManager.getLogger(App.class);
 
 	//private static final int CITY_ID_AVEIRO = 1010500;
 
@@ -33,8 +38,12 @@ public class App {
 			System.out.println("Minimum Temperature: " + forecast.getData().listIterator().next().getTMin());
 			
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.error("Weather request for city {} has failed.", CITY_ID, ex);
 		}
+		
+		logger.debug("Debug log");
+		logger.error("Error log");
+		logger.info("Info log");
 	}
 
 }
